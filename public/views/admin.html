@@ -1,0 +1,441 @@
+<style>
+        .nav-pills>li>a {
+    border-radius: 4px !important;
+    background-color: #31708f !important;
+    color:#fff;
+}
+        </style>
+
+<div class="container ">
+  
+  <div class='btn-group'>
+    
+    <button type="button"  data-toggle="pill" class="btn btn-default btn-arrow-right" href="#menu1">Movie</button>
+    <button type="button"  data-toggle="pill" class="btn btn-default btn-arrow-right" href="#menu2">City</button>
+    <button type="button"  data-toggle="pill" class="btn btn-default btn-arrow-right" href="#menu3">Theatre</button>
+    <button type="button" data-toggle="pill" class="btn btn-default btn-arrow-right" href="#menu4">Show Time</button>
+    
+    <button type="button" data-toggle="pill" class="btn btn-default btn-arrow-right" href="#menu5">Assign Movie</button>
+  </div> 
+  
+  
+  <div class="tab-content">
+   
+    <div id="menu1" class="tab-pane fade in active">
+     
+        <div class="col-md-6 col-md-offset-3">
+<form class="form-horizontal" >
+  <fieldset>
+    <div id="legend">
+      <legend class="">Add Movie</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Movie Name</label>
+      <div class="controls">
+        <input type="text" id="moviTitle" name="moviTitle" placeholder="Enter Movie Name" class="form-control" ng-model="movi.moviTitle">
+      </div>
+    </div>
+    
+    
+    <div class="control-group">
+      <!-- Button -->
+      <div class="col-md-4 col-md-offset-4" style="padding:10px">
+        <button ng-click="addMovie(movi)" class="btn btn-primary">Add </button>
+        <button ng-click="updateMovie(movi)" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+<div class="col-md-12">
+<div class="row">
+
+
+<div class="alert alert-warning" ng-show="errorMessage">
+    <a href="#" class="close" ng-click="clearErrorMessage()" >&times;</a>
+    <strong>Warning!</strong> {{msg}}.
+</div>
+<div class="alert alert-success fade in"  ng-show="successMessage">
+    <a href="#" class="close"  ng-click="clearErrorMessage()">&times;</a>
+    <strong>Success!</strong> {{smsg}}.
+</div>
+
+<div class="table-responsive">  
+  <p class="search-movie"><input type="text" placeholder="Search Movie" class="form-control" ng-model="test"></p>
+        <table class="table">
+            <thead>
+             <tr>
+                <td> photo</td>
+                <td> Name</td>
+                <td> Actor</td>
+                <td> Director</td>
+                <td> Plot</td>
+                <td> Language</td>
+                <td> Generation</td>
+                <td>Action</td>
+             </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat=" movi in moviList | filter:test">
+                    <td><img src="{{movi.moviPoster}}" class="img-circle" style="width:60px;height:60px"></td>
+                    <td>{{movi.moviTitle}}</td>
+                    <td>{{movi.moviActors}}</td>
+                    <td>{{movi.moviDirector}}</td>
+                    <td>{{movi.moviPlot}}</td>
+                    <td>{{movi.moviLanguage}}</td>
+                    <td>{{movi.moviGenre}}</td>
+                    <td style="width:7%">
+                       <!-- <button ng-click="editMovie(movi)" title="Edit" class="btn-xs btn-primary"><i class="fa fa-pencil"></i></button>-->
+                        <button ng-click="removeMovie(movi)" title="Delete" class="btn-xs btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+     
+    </div>
+    
+    <div id="menu2" class="tab-pane fade">
+     
+            
+<div class="col-md-6 col-md-offset-3">
+<form class="form-horizontal" >
+  <fieldset>
+    <div id="legend">
+      <legend class="">Add City</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">City Name</label>
+      <div class="controls">
+        <input type="text" id="city" name="city" placeholder="Enter City Name" class="form-control" ng-model="city.city">
+      </div>
+    </div>
+    
+    
+    <div class="control-group">
+      <!-- Button -->
+      <div class="col-md-4 col-md-offset-4" style="padding:10px">
+        <button ng-click="addCity(city)" class="btn btn-primary">Add </button>
+        <button ng-click="updateCity(city)" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+    
+    <div class="col-md-12">
+    <div class="row">
+     <div class="table-responsive">  
+      <p class="search-movie"><input type="text" placeholder="Search City" class="form-control" ng-model="test"></p>
+        <table class="table">
+            <thead>
+             <tr>
+            
+                <td> City</td>
+               
+                <td>Action</td>
+             </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat="city in cityList | filter:test">
+                
+                    <td>{{city.city}}</td>
+                    
+                   
+                    <td style="width:7%">
+                       <!-- <button ng-click="editCity(city)" title="Edit" class="btn-xs btn-primary"><i class="fa fa-pencil"></i></button>-->
+                        <button ng-click="removeCity(city)" title="Delete" class="btn-xs btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+     
+    </div>
+    
+    <div id="menu3" class="tab-pane fade">
+     
+     <div class="col-md-6 col-md-offset-3">
+<form class="form-horizontal" >
+  <fieldset>
+    <div id="legend">
+      <legend class="">Add Theatre</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Theatre Name</label>
+      <div class="controls">
+        <input type="text" id="title" name="title" placeholder="Enter Theatre Name" class="form-control" ng-model="theatre.title">
+      </div>
+    </div>
+    
+      <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Theatre City</label>
+      <div class="controls">
+        <select  id="city" name="city"  class="form-control" ng-model="theatre.city" >
+        <option ng-repeat="city in cityList" value="{{city.city}}">{{city.city}}</option>
+        </select>
+      </div>
+    </div>
+    
+     <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">No of Seats</label>
+      <div class="controls">
+        <input type="text" id="no_of_seat" name="no_of_seat" placeholder="Enter No of Seats" class="form-control" ng-model="theatre.no_of_seat">
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Amount</label>
+      <div class="controls">
+        <input type="text" id="amount" name="amount" placeholder="Enter Amount" class="form-control" ng-model="theatre.amount">
+      </div>
+    </div>
+    
+
+
+ 
+    <div class="control-group">
+      <!-- Button -->
+      <div class="col-md-4 col-md-offset-4" style="padding:10px">
+        <button ng-click="addTheatre(theatre)" class="btn btn-primary">Add </button>
+        <button ng-click="updateTheatre(theatre)" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+<div class="col-md-12">
+<div class="row">
+<div class="table-responsive">  
+  <p class="search-movie"><input type="text" placeholder="Search Theatre" class="form-control" ng-model="test"></p>
+        <table class="table">
+            <thead>
+             <tr>
+                <td> Name</td>
+                <td> City</td>
+                <td> Amount</td>
+                <td> Seats</td>
+               
+                <td>Action</td>
+             </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat="theatre in theatreList | filter:test">
+                    <td>{{theatre.title}}</td>
+                    <td>{{theatre.city}}</td>
+                     <td>{{theatre.amount}}</td>
+                      <td>{{theatre.no_of_seat}}</td>
+                   
+                    <td style="width:7%">
+                        <!--<button ng-click="editTheatre(theatre)" title="Edit" class="btn-xs btn-primary"><i class="fa fa-pencil"></i></button>-->
+                        <button ng-click="removeTheatre(theatre)" title="Delete" class="btn-xs btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+     
+    </div>
+    
+     <div id="menu4" class="tab-pane fade">
+     
+                    
+        <div class="col-md-6 col-md-offset-3">
+<form class="form-horizontal" >
+  <fieldset>
+    <div id="legend">
+      <legend class="">Add Show Time</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Show Time</label>
+      <div class="controls">
+        <input type="time" id="showtime" name="showtime" placeholder="Enter Show Time" class="form-control" ng-model="showtimes.showtime">
+      </div>
+    </div>
+    
+    
+    <div class="control-group">
+      <!-- Button -->
+      <div class="col-md-4 col-md-offset-4" style="padding:10px">
+        <button ng-click="addShow(showtimes)" class="btn btn-primary">Add </button>
+        <button ng-click="updateShowtime(showtimes)" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+<div class="col-md-12">
+<div class="row">
+<div class="table-responsive">  
+  <p class="search-movie"><input type="text" placeholder="Search Timing" class="form-control" ng-model="test"></p>
+        <table class="table">
+            <thead>
+             <tr>
+                <td>Timing</td>
+               
+                <td>Action</td>
+             </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat=" showtimes in showtimeList | filter:test">
+                    <td>{{showtimes.showtime | date:'h:mm:ss a'}}</td>
+                    <td style="width:7%">
+                       <!-- <button ng-click="editShowtime(showtimes)" title="Edit" class="btn-xs btn-primary"><i class="fa fa-pencil"></i></button>-->
+                        <button ng-click="removeShowtime(showtimes)" title="Delete" class="btn-xs btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+     
+    </div>
+    
+ 
+    
+     <div id="menu5" class="tab-pane fade">
+     
+        
+            <div class="col-md-6 col-md-offset-3">
+<form class="form-horizontal" >
+  <fieldset>
+    <div id="legend">
+      <legend class="">Assign Movie</legend>
+    </div>
+
+ <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Movie</label>
+      <div class="controls">
+        <select id="asnmovi" name="asnmovi"  class="form-control" ng-model="asnmovies.asnmovi">
+      <option ng-repeat="movi in moviList" value="{{movi.moviTitle}}">{{movi.moviTitle}}</option>
+    </select>
+      </div>
+    </div>
+    
+     <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">City</label>
+      <div class="controls">
+        <select id="asnmovicity" name="asnmovicity"  class="form-control" ng-model="asnmovies.asnmovicity" ng-change="getTheatreDetail();">
+      <option ng-repeat="city in cityList" value="{{city.city}}">{{city.city}}</option>
+    </select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Theatre</label>
+      <div class="controls">
+        <select id="asnmovitheatre" name="asnmovitheatre"  class="form-control" ng-model="asnmovies.asnmovitheatre" >
+      <option ng-repeat="atheatre in atheatreList" value="{{atheatre.title}}">{{atheatre.title}}</option>
+    </select>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Show Time</label>
+      <div class="controls">
+        <select id="asnshowtime" name="asnshowtime"  class="form-control" ng-model="asnmovies.asnshowtime" >
+      <option ng-repeat="ashowtime in showtimeList" value="{{ashowtime.showtime | date:'h:mm:ss a'}}">{{ashowtime.showtime | date:'h:mm:ss a'}}</option>
+    </select>
+      </div>
+    </div>
+
+     <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Date</label>
+
+      <div class="controls">
+        <div class="col-md-12">
+          <div class="row">
+
+       <div class="col-md-6">
+         <input type="date" id="fromdate" name="fromdate" class="form-control" placeholder="From date" ng-model="asnmovies.fromdate">
+      </div>
+
+      <div class="col-md-6">
+         <input type="date" id="todate" name="todate" class="form-control" placeholder="To date" ng-model="asnmovies.todate">
+       </div>
+
+ </div>
+</div>
+</div>
+</div>
+   
+  
+    <div class="control-group">
+      <!-- Button -->
+      <div class="col-md-6 col-md-offset-4" style="padding:10px">
+        <button ng-click="addAsnmovi(asnmovies)" class="btn btn-primary">Assign Movie</button>
+        <button ng-click="updateAsnmovi(asnmovies)" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+<div class="col-md-12">
+<div class="row">
+<div class="table-responsive">  
+  <p class="search-movie"><input type="text" placeholder="Search Assign Movie" class="form-control" ng-model="test"></p>
+        <table class="table">
+            <thead>
+             <tr>
+                <td>Movie</td>
+                <td>Theatre</td>
+                <td>City</td>
+                <td>Show time</td>
+                <td>From date</td>
+                <td>To date</td>
+                <td>Action</td>
+             </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat=" asnmovies in asnmoviesList | filter:test">
+                    <td>{{asnmovies.asnmovi}}</td>
+                    <td>{{asnmovies.asnmovitheatre}}</td>
+                    <td>{{asnmovies.asnmovicity}}</td>
+                    <td>{{asnmovies.asnshowtime | date:'h:mm:ss a'}}</td>
+                    <td>{{asnmovies.fromdate}}</td>
+                    <td>{{asnmovies.todate}}</td>
+                    <td style="width:7%">
+                        <!--<button ng-click="editAsnmovi(asnmovies)" title="Edit" class="btn-xs btn-primary"><i class="fa fa-pencil"></i></button>-->
+                        <button ng-click="removeAsnmovi(asnmovies)" title="Delete" class="btn-xs btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+      
+    </div>
+    
+  </div>
+  
+</div>

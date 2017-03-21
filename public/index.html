@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+
+    <title>Movie Booking</title>
+    <!-- load bootstrap -->
+      <link rel="stylesheet" href="css/bootstrap-min.css">
+      <link rel="stylesheet" href="css/bootstrap-directional-buttons.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
+      
+      <script src="js/lib/angular.min.js"></script>
+      <script src="js/lib/angular-route.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers/mainCtrl.js"></script>
+    <script src="js/controllers/movieCtrl.js"></script>
+    <script src="js/controllers/adminCtrl.js"></script>
+    <script src="js/controllers/bookCtrl.js"></script>
+    <script src="js/services/NerdService.js"></script>
+    <script src="js/services/GeekService.js"></script>
+    <script src="js/appRoutes.js"></script>
+    
+</head>
+
+<body ng-app="movieBookingApp">
+   
+      <!-- HEADER -->
+   
+        <header>
+            <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#/"><img src="images/tip-logo.png"></a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Home</a></li>
+                  
+                                        
+                    <li><a href="/admin">Admin</a></li>                       
+                </ul>
+                
+            </div>
+            </nav>
+        </header>
+
+
+
+
+
+        <div ng-view></div>
+
+   
+
+   
+ <script src="js/lib/jquery.min.js"></script>
+ <script src="js/lib/bootstrap.min.js"></script>
+ <script src="js/lib/moment.js"></script>
+ 
+</body>
+
+</html>

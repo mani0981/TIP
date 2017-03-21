@@ -1,0 +1,79 @@
+
+
+<div class="accordion">
+  <ul>
+    <li ng-repeat=" movi in moviList | limitTo: 5" ng-style="{'background-image':'url({{movi.moviPoster}})'}">
+      <div> <a href="#">
+        <h2>{{movi.moviTitle}}</h2>
+        <p>{{movi.moviPlot}}</p>
+        </a> </div>
+    </li>
+     
+  </ul>
+</div>
+
+<div class=" container movieBlock" >
+	
+   
+    <div class="row">
+
+       
+
+ <p class="search-movie"><input type="text" placeholder="Search Movie"  ng-model="test"></p>
+
+
+
+      <div class="col-sm-6 col-md-4"  ng-repeat=" movi in moviList | filter:test">
+        <div class="thumbnail">
+          <img src="{{movi.moviPoster}}" />
+          <div class="caption col-lg-7">
+            <h3 >{{movi.moviTitle}}</h3>
+
+            <p>{{movi.moviGenre}}</p>
+            <p class="actor">{{movi.moviActors}}</p>
+            
+ 
+
+            <a type="button" href="/booking" ng-click="bookTickets(movi)" class="link-text">BOOK NOW</a>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container jumbotron text-center wow fadeInUp" ng-show="bookingWindow" style="background-color: lightblue;">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card-block card-dark">
+        <center><h1>Book Tickets for {{assignList1[0].movieTitle}}</h1></center>
+        <p>{{assignList1[0].showTime}}, {{assignList1[0].theatreName}}, {{assignList1[0].cityName}}</p>
+        <hr>
+        <p ng-model="assign.ticketPrice">Ticket Price: {{assignList1[0].ticketPrice}}</p>
+        <input type="number" placeholder="Number of Seats"  ng-model="booking.userSeats" ng-change="calculateTotal(booking)" autofocus>
+        <br><br>
+        <button type="button" class="btn btn-success" ng-click="bookNow(booking)">Pay ₹ {{totalAmount}} and proceed</button>
+        <button type="button" class="btn btn-primary" ng-click="goBack()">Go Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" ng-show="orderSuccess" style="background-color: lightgreen;">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card-block">
+        <center><h2>BOOKING OF {{booking.userSeats}} TICKETS SUCCESSFUL</h2>
+          <h5><strong>Order ID: {{orderId}}</strong></h5>
+          <h5>Movie Name: {{assignList1[0].movieTitle}}</h5>
+          <h5>Venue: {{assignList1[0].theatreName}}, {{assignList1[0].cityName}}</h5>
+          <h1><span class="glyphicon glyphicon-floppy-saved"></span></h1>
+          <h2>THANK YOU FOR BOOKING THE MOVIE</h2>
+          <h3 class="glyphicon glyphicon-phone-alt"> For any queries please feel free to contact us.</span></h3>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>
+    
+</div>
