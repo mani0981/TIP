@@ -1,35 +1,42 @@
-movieBookingApp.controller('BookController', function($scope, $http, $log, $location)
+movieBookingApp.controller('BookController', function($scope, $http, $log, $location, $rootScope)
 {
 
     $scope.tagline = 'All bookings on this page';
+    $scope.movi = $rootScope.movieData;
+    console.log("______________________movieData")
+    console.log($scope.movi);
 
-    var refresh = function() {
-      
-        $http.get('/book/getBooking').success(function(response) {
-            console.log('READ IS SUCCESSFUL');
-            $scope.bookList = response;
-            console.log($scope.bookList);
-            $scope.booking = "";
-        });
-        $scope.adminCity = true;
-            $scope.adminTheatre = true;
-            $scope.adminAssign = true;
-            $scope.adminMovies = true;
-            $scope.adminShowtime = true;
-            $scope.adminBooking = true;
-        
-    };
+     $scope.bookTime = $rootScope.timeData;
+     $scope.selectCity;
+     $scope.selectTheater;
+   
+
+      //Assign Movie
+        // $http.get('/assignmovie/getAssignmovi').success(function (response) {
+        //     console.log('READ IS SUCCESSFUL');
+        //     $scope.asnmoviesList = response;
+        //     $scope.asnmovies = "";
+        //      console.log("_______________________________________________________Assign");
+        //     console.log(response);
+        // });
+
+$scope.getAsnDataForMovie = function () {
+        console.log("RESULT");
+        console.log($scope.movi.moviTitle);
+        $http.get('/assignmovie/getAssignmoviData/' +  $scope.movi.moviTitle).success(function (response) {
+
+             $scope.selectList = response;
+             $scope.selectCity = $scope.selectList[0].asnmovicity;
+             $scope.selectTheater = $scope.selectList[0].asnmovitheatre;
+             
 
 
-    refresh();
 
-    $scope.deleteBooking = function(booking) {
-        console.log($scope.booking);
-        $http.delete('/book/deleteBooking/' + booking._id).success(function(response) {
+            console.log("Assign movie get RESULT");
             console.log(response);
-            console.log('DELETED SUCCESSFULLY');
-            refresh();
-        });
+            console.log($scope.selectCityList);
+            //refresh();
+        })
     };
-
+      $scope.getAsnDataForMovie();
 });

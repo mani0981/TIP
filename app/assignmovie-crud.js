@@ -30,6 +30,15 @@ router.get('/getAssignmovi', function (req, res) {
 });
 
 
+//Get AssignMovie Data
+router.get('/getAssignmoviData/:moviTitle', function (req, res) {
+    console.log("REACHED GET FUNCTION ON SERVER");
+   Assignmovie.find({asnmovi: req.params.moviTitle}, function (err, docs) {
+         res.json(docs);
+         
+    })
+});
+
 
 
 router.get('/editAsnmovi/:id', function (req, res) {
