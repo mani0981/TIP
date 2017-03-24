@@ -75,11 +75,13 @@ movieBookingApp.controller('adminController', function($scope, $http) {
                     console.log("CREATE IS SUCCESSFUL");
                     $scope.smsg = response.data.moviTitle + " added successfully.";
                     $scope.successMessage = true;
+                    $scope.errorMessage = false;
                     refresh();
                 },function(err){
                     console.log($scope.msg);
                     $scope.msg = err.data.op.moviTitle + " already in the list";
                     $scope.errorMessage = true;
+                    $scope.successMessage = false;
                     //$scope.$apply();
                     
                 
